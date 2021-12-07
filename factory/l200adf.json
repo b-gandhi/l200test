@@ -1,0 +1,9 @@
+{
+	"name": "l200adf",
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8ee21410-d548-4f1c-a098-320963ae63e9",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}
