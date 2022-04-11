@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "l200synapse"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"value": ""
+		},
+		"AzureSynapseAnalytics2_connectionString": {
+			"value": ""
+		},
+		"CosmosDb1_connectionString": {
+			"value": ""
+		},
+		"FileSource_connectionString": {
+			"value": ""
+		},
+		"l200synapse-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"l200withaccesskey_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://l200permissiontestsa.dfs.core.windows.net/"
+		},
+		"l200kv_LinkedService_properties_typeProperties_baseUrl": {
+			"value": "https://kv-l200-test.vault.azure.net/"
+		},
+		"l200synapse-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://l200testsa.dfs.core.windows.net"
+		},
+		"nyc_tlc_green_sasUri": {
+			"value": ""
+		}
+	}
+}
