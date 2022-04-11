@@ -1,0 +1,31 @@
+{
+	"name": "TestProductCategory_ProductCategory_DataFlow",
+	"properties": {
+		"folder": {
+			"name": "TestProductCategory"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "wsasadvidmcorpeus2-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "ProductCategorycsvSource"
+				}
+			],
+			"sinks": [
+				{
+					"name": "ProductCategorySink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectProductCategory"
+				}
+			],
+			"script": "source(output(\n\t\tProductCategoryID as short,\n\t\tName as string,\n\t\trowguid as string,\n\t\tModifiedDate as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delimited',\n\tfileSystem: 'fsdvidmcorpeus2',\n\tfolderPath: 'test-source',\n\tfileName: 'ProductCategory.csv',\n\tcolumnDelimiter: ',',\n\tescapeChar: '\\\\',\n\tquoteChar: '\\\"',\n\tcolumnNamesAsHeader: true) ~> ProductCategorycsvSource\nProductCategorycsvSource select(mapColumn(\n\t\tProductCategoryId = ProductCategoryID,\n\t\tProductCategoryName = Name,\n\t\tProductCategoryDescription = Name\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectProductCategory\nSelectProductCategory sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'DatabaseTest',\n\ttableName: 'ProductCategory',\n\tinput(\n\t\tProductCategoryId as integer,\n\t\tProductCategoryName as string,\n\t\tProductCategoryDescription as string\n\t)) ~> ProductCategorySink"
+		}
+	}
+}
