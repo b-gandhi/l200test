@@ -1,0 +1,10 @@
+{
+	"name": "synapse-ws-custstgacct--l200synapse-l200testsa",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/e7930490-e1c6-48b2-865c-aa9e0547dfad/resourceGroups/L200TestPrepRG/providers/Microsoft.Storage/storageAccounts/l200testsa",
+		"groupId": "dfs",
+		"fqdns": [
+			"l200testsa.dfs.core.windows.net"
+		]
+	}
+}

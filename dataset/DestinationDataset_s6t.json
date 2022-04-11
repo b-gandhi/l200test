@@ -1,0 +1,30 @@
+{
+	"name": "DestinationDataset_s6t",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "TPID",
+				"type": "bigint",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "[ACRMonthlyNetM/MIncrease]",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Reporting_ACRNewBizandErosion_Destination"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,95 @@
+{
+	"name": "Notebook 5",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "tsgpool",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "c704d40a-e316-4241-b9b5-664b3f268f8a"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/e7930490-e1c6-48b2-865c-aa9e0547dfad/resourceGroups/L200TestPrepRG/providers/Microsoft.Synapse/workspaces/l200synapse/bigDataPools/tsgpool",
+				"name": "tsgpool",
+				"type": "Spark",
+				"endpoint": "https://l200synapse.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/tsgpool",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# NOTE\n",
+					"\n",
+					"For Spark 3 Cosmos DB connector has slightly different configuration. Please select different snippest if a Spark 3.1 + pool is attached."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"# Load a streaming Spark DataFrame from a Cosmos DB container\n",
+					"# To select a preferred list of regions in a multi-region Cosmos DB account, add .option(\"spark.cosmos.preferredRegions\", \"<Region1>,<Region2>\")\n",
+					"\n",
+					"# For Spark 2.4\n",
+					"dfStream = spark.readStream\\\n",
+					"    .format(\"cosmos.oltp\")\\\n",
+					"    .option(\"spark.synapse.linkedService\", \"cosmolinked\")\\\n",
+					"    .option(\"spark.cosmos.container\", \"Items\")\\\n",
+					"    .option(\"spark.cosmos.changeFeed.readEnabled\", \"true\")\\\n",
+					"    .option(\"spark.cosmos.changeFeed.startFromTheBeginning\", \"true\")\\\n",
+					"    .option(\"spark.cosmos.changeFeed.checkpointLocation\", \"/localReadCheckpointFolder\")\\\n",
+					"    .option(\"spark.cosmos.changeFeed.queryName\", \"streamQuery\")\\\n",
+					"    .load()\n",
+					"\n",
+					"# For Spark 3.1 +\n",
+					"# dfStream = spark.readStream\\\n",
+					"#     .format(\"cosmos.oltp.changeFeed\")\\\n",
+					"#     .option(\"spark.synapse.linkedService\", \"cosmolinked\")\\\n",
+					"#     .option(\"spark.cosmos.container\", \"Items\")\\\n",
+					"#     .option(\"spark.cosmos.changeFeed.startFrom\", \"Beginning\")\\\n",
+					"#     .option(\"spark.cosmos.changeFeed.mode\", \"Incremental\")\\\n",
+					"#     .load()\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 1
+			}
+		]
+	}
+}

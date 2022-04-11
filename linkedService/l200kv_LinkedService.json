@@ -1,0 +1,11 @@
+{
+	"name": "l200kv_LinkedService",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kv-l200-test.vault.azure.net/"
+		}
+	}
+}

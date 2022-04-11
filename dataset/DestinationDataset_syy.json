@@ -1,0 +1,30 @@
+{
+	"name": "DestinationDataset_syy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "testid",
+				"type": "smallint",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "ACRMonthlyNetM/MIncrease",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "testdwcolumnissue"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

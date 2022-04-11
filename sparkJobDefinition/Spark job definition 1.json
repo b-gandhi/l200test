@@ -1,0 +1,32 @@
+{
+	"name": "Spark job definition 1",
+	"properties": {
+		"targetBigDataPool": {
+			"referenceName": "tsgpool",
+			"type": "BigDataPoolReference"
+		},
+		"requiredSparkVersion": "3.1",
+		"language": "python",
+		"jobProperties": {
+			"name": "Spark job definition 1",
+			"file": "abfss://filesystem@l200testsa.dfs.core.windows.net/wordcount.py",
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "1",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "6f98744e-9649-469a-8f5c-f66b922ee17b"
+			},
+			"args": [
+				"abfss://filesystem@l200testsa.dfs.core.windows.net/shakespeare.txt",
+				"abfss://filesystem@l200testsa.dfs.core.windows.net/result"
+			],
+			"jars": [],
+			"files": [],
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2
+		}
+	}
+}

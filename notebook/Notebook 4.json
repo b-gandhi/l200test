@@ -1,0 +1,67 @@
+{
+	"name": "Notebook 4",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "spark24",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "9dede4dd-b41b-45b1-8892-9ebb48ccb34a"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "scala"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/e7930490-e1c6-48b2-865c-aa9e0547dfad/resourceGroups/L200TestPrepRG/providers/Microsoft.Synapse/workspaces/l200synapse/bigDataPools/spark24",
+				"name": "spark24",
+				"type": "Spark",
+				"endpoint": "https://l200synapse.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/spark24",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 8,
+				"memory": 56,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"var df = spark.sql(\"select * from test2\");\r\n",
+					"df.createOrReplaceTempView(\"spark24\")\r\n",
+					"var df4 = spark.sql(\"select * from spark24\")\r\n",
+					"df4.show()"
+				],
+				"attachments": null,
+				"execution_count": 3
+			}
+		]
+	}
+}

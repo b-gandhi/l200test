@@ -1,0 +1,27 @@
+{
+	"name": "SourceDataset_syy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "testid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ACRMonthlyNetM/MIncrease",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Reporting_ACRNewBizandErosion"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

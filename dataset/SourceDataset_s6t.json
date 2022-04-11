@@ -1,0 +1,27 @@
+{
+	"name": "SourceDataset_s6t",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "TPID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "[ACRMonthlyNetM/MIncrease]",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Reporting_ACRNewBizandErosion1"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

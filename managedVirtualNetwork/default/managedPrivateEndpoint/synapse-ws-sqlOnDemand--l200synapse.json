@@ -1,0 +1,10 @@
+{
+	"name": "synapse-ws-sqlOnDemand--l200synapse",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/e7930490-e1c6-48b2-865c-aa9e0547dfad/resourceGroups/L200TestPrepRG/providers/Microsoft.Synapse/workspaces/l200synapse",
+		"groupId": "sqlOnDemand",
+		"fqdns": [
+			"l200synapse-ondemand.d646ed62-b8bb-4dd2-bd2c-0a931c9d4c1c.sql.azuresynapse.net"
+		]
+	}
+}
