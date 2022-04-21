@@ -491,17 +491,6 @@
 								}
 							}
 						},
-						"?xml": {
-							"type": "object",
-							"properties": {
-								"@@encoding": {
-									"type": "string"
-								},
-								"@version": {
-									"type": "string"
-								}
-							}
-						},
 						"soapenv:Envelope": {
 							"type": "object",
 							"properties": {
