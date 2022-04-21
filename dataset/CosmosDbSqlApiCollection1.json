@@ -2,7 +2,7 @@
 	"name": "CosmosDbSqlApiCollection1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "CosmosDb1",
+			"referenceName": "CosmosDb2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -766,9 +766,6 @@
 					"type": "string"
 				}
 			}
-		},
-		"typeProperties": {
-			"collectionName": "TransformedOrder"
 		}
 	},
 	"type": "Microsoft.Synapse/workspaces/datasets"
