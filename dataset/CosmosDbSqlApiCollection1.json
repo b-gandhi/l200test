@@ -766,6 +766,9 @@
 					"type": "string"
 				}
 			}
+		},
+		"typeProperties": {
+			"collectionName": "WebsiteData"
 		}
 	},
 	"type": "Microsoft.Synapse/workspaces/datasets"
