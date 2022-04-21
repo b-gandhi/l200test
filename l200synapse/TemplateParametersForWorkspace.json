@@ -17,9 +17,6 @@
 		"AzureSynapseAnalytics2_connectionString": {
 			"value": ""
 		},
-		"CosmosDb1_connectionString": {
-			"value": ""
-		},
 		"FileSource_connectionString": {
 			"value": ""
 		},
@@ -40,6 +37,9 @@
 		},
 		"nyc_tlc_green_sasUri": {
 			"value": ""
+		},
+		"wsasadvidmcorpeus2-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://stdvidmcorpeus2.dfs.core.windows.net"
 		}
 	}
 }
