@@ -6,10 +6,6 @@
 			"url": "https://stdvidmcorpeus2.dfs.core.windows.net"
 		},
 		"type": "AzureBlobFS",
-		"connectVia": {
-			"referenceName": "AutoResolveIntegrationRuntime1",
-			"type": "IntegrationRuntimeReference"
-		},
 		"annotations": []
 	}
 }
