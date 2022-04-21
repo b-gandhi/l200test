@@ -494,7 +494,7 @@
 						"?xml": {
 							"type": "object",
 							"properties": {
-								"@encoding": {
+								"@@encoding": {
 									"type": "string"
 								},
 								"@version": {
