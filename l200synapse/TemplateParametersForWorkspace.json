@@ -8,6 +8,12 @@
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
+		"AzureDataLakeStorage2_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage3_accountKey": {
+			"value": ""
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
@@ -15,6 +21,12 @@
 			"value": ""
 		},
 		"AzureSynapseAnalytics2_connectionString": {
+			"value": ""
+		},
+		"CosmosDb1_connectionString": {
+			"value": ""
+		},
+		"CosmosDb2_connectionString": {
 			"value": ""
 		},
 		"FileSource_connectionString": {
@@ -28,6 +40,12 @@
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://l200permissiontestsa.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"value": "https://l200testsa.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage3_properties_typeProperties_url": {
+			"value": "https://l200testsa.dfs.core.windows.net"
 		},
 		"l200kv_LinkedService_properties_typeProperties_baseUrl": {
 			"value": "https://kv-l200-test.vault.azure.net/"

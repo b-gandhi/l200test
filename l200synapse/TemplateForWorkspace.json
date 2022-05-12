@@ -11,6 +11,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureDataLakeStorage2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
+		},
+		"AzureDataLakeStorage3_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage3'"
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
@@ -22,6 +30,14 @@
 		"AzureSynapseAnalytics2_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSynapseAnalytics2'"
+		},
+		"CosmosDb1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDb1'"
+		},
+		"CosmosDb2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CosmosDb2'"
 		},
 		"FileSource_connectionString": {
 			"type": "secureString",
@@ -38,6 +54,14 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://l200permissiontestsa.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://l200testsa.dfs.core.windows.net"
+		},
+		"AzureDataLakeStorage3_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://l200testsa.dfs.core.windows.net"
 		},
 		"l200kv_LinkedService_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -61,103 +85,782 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('workspaceName'), '/CopyPipeline_s6t')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"name": "[concat(parameters('workspaceName'), '/CosmosDbSqlApiCollection1')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
-				"activities": [
-					{
-						"name": "Copy_s6t",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "dbo.Reporting_ACRNewBizandErosion1"
-							},
-							{
-								"name": "Destination",
-								"value": "dbo.Reporting_ACRNewBizandErosion_Destination"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "TPID",
-											"type": "Int64",
-											"physicalType": "bigint"
+				"linkedServiceName": {
+					"referenceName": "CosmosDb2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CosmosDbSqlApiCollection",
+				"schema": {
+					"type": "object",
+					"properties": {
+						"data": {
+							"type": "object",
+							"properties": {
+								"order": {
+									"type": "object",
+									"properties": {
+										"code": {
+											"type": "string"
 										},
-										"sink": {
-											"name": "TPID",
-											"type": "Int64",
-											"physicalType": "bigint"
-										}
-									},
-									{
-										"source": {
-											"name": "[ACRMonthlyNetM/MIncrease]",
-											"type": "String",
-											"physicalType": "nvarchar"
+										"calculated": {
+											"type": "boolean"
 										},
-										"sink": {
-											"name": "[ACRMonthlyNetM/MIncrease]",
-											"type": "String",
-											"physicalType": "nvarchar"
+										"deliveryItemsQuantity": {
+											"type": "integer"
+										},
+										"entries": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"basePrice": {
+														"type": "object",
+														"properties": {
+															"currencyIso": {
+																"type": "string"
+															},
+															"formattedValue": {
+																"type": "string"
+															},
+															"priceType": {
+																"type": "string"
+															},
+															"value": {
+																"type": "number"
+															}
+														}
+													},
+													"entryNumber": {
+														"type": "integer"
+													},
+													"product": {
+														"type": "object",
+														"properties": {
+															"code": {
+																"type": "string"
+															},
+															"productId": {
+																"type": "string"
+															},
+															"availableForPickup": {
+																"type": "boolean"
+															},
+															"manufacturer": {
+																"type": "string"
+															},
+															"purchasable": {
+																"type": "boolean"
+															},
+															"url": {
+																"type": "string"
+															},
+															"itemUnitOfMeasure": {
+																"type": "string"
+															},
+															"originalUnitOfMeasure": {
+																"type": "string"
+															},
+															"upcType": {
+																"type": "string"
+															},
+															"name": {
+																"type": "string"
+															},
+															"upcId": {
+																"type": "string"
+															},
+															"uom": {
+																"type": "string"
+															}
+														}
+													},
+													"quantity": {
+														"type": "integer"
+													},
+													"updateable": {
+														"type": "boolean"
+													}
+												}
+											}
+										},
+										"guid": {
+											"type": "string"
+										},
+										"net": {
+											"type": "string"
+										},
+										"paymentInfo": {
+											"type": "object",
+											"properties": {
+												"accountHolderName": {
+													"type": "string"
+												},
+												"billingAddress": {
+													"type": "object",
+													"properties": {
+														"country": {
+															"type": "object",
+															"properties": {
+																"isocode": {
+																	"type": "string"
+																},
+																"name": {
+																	"type": "string"
+																}
+															}
+														},
+														"email": {
+															"type": "string"
+														},
+														"firstName": {
+															"type": "string"
+														},
+														"formattedAddress": {
+															"type": "string"
+														},
+														"id": {
+															"type": "string"
+														},
+														"lastName": {
+															"type": "string"
+														},
+														"line1": {
+															"type": "string"
+														},
+														"postalCode": {
+															"type": "string"
+														},
+														"shippingAddress": {
+															"type": "string"
+														},
+														"town": {
+															"type": "string"
+														},
+														"state": {
+															"type": "object",
+															"properties": {
+																"isocode": {
+																	"type": "string"
+																},
+																"name": {
+																	"type": "string"
+																}
+															}
+														},
+														"visibleInAddressBook": {
+															"type": "string"
+														}
+													}
+												},
+												"cardNumber": {
+													"type": "string"
+												},
+												"cardType": {
+													"type": "object",
+													"properties": {
+														"code": {
+															"type": "string"
+														},
+														"name": {
+															"type": "string"
+														}
+													}
+												},
+												"defaultPayment": {
+													"type": "boolean"
+												},
+												"expiryMonth": {
+													"type": "string"
+												},
+												"expiryYear": {
+													"type": "string"
+												},
+												"paymentCardExpiration": {
+													"type": "string"
+												},
+												"id": {
+													"type": "string"
+												},
+												"saved": {
+													"type": "boolean"
+												},
+												"subscriptionId": {
+													"type": "string"
+												},
+												"authTime": {
+													"type": "string"
+												},
+												"requestToken": {
+													"type": "string"
+												},
+												"transactionStatus": {
+													"type": "string"
+												},
+												"transactionStatusDetails": {
+													"type": "string"
+												}
+											}
+										},
+										"pickupItemsQuantity": {
+											"type": "integer"
+										},
+										"pickUpSlotInfo": {
+											"type": "object",
+											"properties": {
+												"pickupSlotId": {
+													"type": "string"
+												},
+												"pickupDate": {
+													"type": "string"
+												}
+											}
+										},
+										"site": {
+											"type": "string"
+										},
+										"store": {
+											"type": "string"
+										},
+										"totalItems": {
+											"type": "integer"
+										},
+										"subTotal": {
+											"type": "object",
+											"properties": {
+												"currencyIso": {
+													"type": "string"
+												},
+												"formattedValue": {
+													"type": "string"
+												},
+												"priceType": {
+													"type": "string"
+												},
+												"value": {
+													"type": "number"
+												}
+											}
+										},
+										"deliveryCost": {
+											"type": "object",
+											"properties": {
+												"currencyIso": {
+													"type": "string"
+												},
+												"formattedValue": {
+													"type": "string"
+												},
+												"priceType": {
+													"type": "string"
+												},
+												"value": {
+													"type": "number"
+												}
+											}
+										},
+										"depositPrice": {
+											"type": "object",
+											"properties": {
+												"currencyIso": {
+													"type": "string"
+												},
+												"formattedValue": {
+													"type": "string"
+												},
+												"priceType": {
+													"type": "string"
+												},
+												"value": {
+													"type": "integer"
+												}
+											}
+										},
+										"totalDiscounts": {
+											"type": "object",
+											"properties": {
+												"currencyIso": {
+													"type": "string"
+												},
+												"formattedValue": {
+													"type": "string"
+												},
+												"priceType": {
+													"type": "string"
+												},
+												"value": {
+													"type": "number"
+												}
+											}
+										},
+										"totalPrice": {
+											"type": "object",
+											"properties": {
+												"currencyIso": {
+													"type": "string"
+												},
+												"formattedValue": {
+													"type": "string"
+												},
+												"priceType": {
+													"type": "string"
+												},
+												"value": {
+													"type": "number"
+												}
+											}
+										},
+										"totalPriceWithTax": {
+											"type": "object",
+											"properties": {
+												"currencyIso": {
+													"type": "string"
+												},
+												"formattedValue": {
+													"type": "string"
+												},
+												"priceType": {
+													"type": "string"
+												},
+												"value": {
+													"type": "string"
+												}
+											}
+										},
+										"totalTax": {
+											"type": "object",
+											"properties": {
+												"currencyIso": {
+													"type": "string"
+												},
+												"formattedValue": {
+													"type": "string"
+												},
+												"priceType": {
+													"type": "string"
+												},
+												"value": {
+													"type": "string"
+												}
+											}
+										},
+										"created": {
+											"type": "string"
+										},
+										"substitutionPreferenceTypeId": {
+											"type": "string"
+										},
+										"user": {
+											"type": "object",
+											"properties": {
+												"name": {
+													"type": "string"
+												},
+												"uid": {
+													"type": "string"
+												},
+												"accountId": {
+													"type": "string"
+												},
+												"customerFirstName": {
+													"type": "string"
+												},
+												"customerLastName": {
+													"type": "string"
+												},
+												"customerOrderEmailAddress": {
+													"type": "string"
+												},
+												"mperksId": {
+													"type": "string"
+												},
+												"mPerksPhone": {
+													"type": "string"
+												}
+											}
+										},
+										"unitId": {
+											"type": "string"
+										},
+										"status": {
+											"type": "string"
+										},
+										"statusDisplay": {
+											"type": "string"
 										}
 									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
+								},
+								"ResultCode": {
+									"type": "integer"
+								},
+								"ResultDescription": {
+									"type": "string"
+								},
+								"cart": {
+									"type": "object",
+									"properties": {
+										"storeId": {
+											"type": "integer"
+										},
+										"terminalType": {
+											"type": "integer"
+										},
+										"terminal": {
+											"type": "integer"
+										},
+										"depositTotal": {
+											"type": "integer"
+										},
+										"cartWasTotal": {
+											"type": "integer"
+										},
+										"cartNowTotal": {
+											"type": "integer"
+										},
+										"cartSavingsTotal": {
+											"type": "integer"
+										},
+										"cartRewardTotal": {
+											"type": "integer"
+										},
+										"reportAttributeLevel": {
+											"type": "integer"
+										},
+										"selectedHighValueOnly": {
+											"type": "boolean"
+										},
+										"reportCostingInfo": {
+											"type": "boolean"
+										},
+										"rollDepositsInPrimary": {
+											"type": "boolean"
+										},
+										"reportUnitPricing": {
+											"type": "boolean"
+										},
+										"cartItems": {
+											"type": "array"
+										},
+										"loyalty": {
+											"type": "object",
+											"properties": {
+												"mPerks": {
+													"type": "string"
+												},
+												"promoIds": {
+													"type": "array",
+													"items": {
+														"type": "integer"
+													}
+												},
+												"promoVars": {
+													"type": "object"
+												}
+											}
+										},
+										"loyaltySVIDs": {
+											"type": "null"
+										},
+										"payment": {
+											"type": "null"
+										},
+										"rewards": {
+											"type": "array"
+										},
+										"highValuePromos": {
+											"type": "null"
+										},
+										"costingInfo": {
+											"type": "null"
+										}
+									}
+								},
+								"soapenv:Envelope": {
+									"type": "object",
+									"properties": {
+										"soapenv:Body": {
+											"type": "object",
+											"properties": {
+												"VertexEnvelope": {
+													"type": "object",
+													"properties": {
+														"ApplicationData": {
+															"type": "object",
+															"properties": {
+																"ResponseTimeMS": {
+																	"type": "string"
+																}
+															}
+														},
+														"Login": {
+															"type": "object",
+															"properties": {
+																"TrustedId": {
+																	"type": "string"
+																}
+															}
+														},
+														"QuotationResponse": {
+															"type": "object",
+															"properties": {
+																"Currency": {
+																	"type": "object",
+																	"properties": {
+																		"@isoCurrencyCodeAlpha": {
+																			"type": "string"
+																		},
+																		"@isoCurrencyCodeNum": {
+																			"type": "string"
+																		},
+																		"@isoCurrencyName": {
+																			"type": "string"
+																		}
+																	}
+																},
+																"Customer": {
+																	"type": "object",
+																	"properties": {
+																		"CustomerCode": {
+																			"type": "string"
+																		},
+																		"Destination": {
+																			"type": "object",
+																			"properties": {
+																				"City": {
+																					"type": "string"
+																				},
+																				"Country": {
+																					"type": "string"
+																				},
+																				"MainDivision": {
+																					"type": "string"
+																				},
+																				"PostalCode": {
+																					"type": "string"
+																				},
+																				"StreetAddress1": {
+																					"type": "string"
+																				},
+																				"StreetAddress2": {
+																					"type": "string"
+																				},
+																				"@taxAreaId": {
+																					"type": "string"
+																				}
+																			}
+																		}
+																	}
+																},
+																"LineItem": {
+																	"type": "array",
+																	"items": {
+																		"type": "object",
+																		"properties": {
+																			"AssistedParameters": {
+																				"type": "object",
+																				"properties": {
+																					"AssistedParameter": {
+																						"type": "object",
+																						"properties": {
+																							"#text": {
+																								"type": "string"
+																							},
+																							"@originalValue": {
+																								"type": "string"
+																							},
+																							"@paramName": {
+																								"type": "string"
+																							},
+																							"@phase": {
+																								"type": "string"
+																							},
+																							"@ruleName": {
+																								"type": "string"
+																							}
+																						}
+																					}
+																				}
+																			},
+																			"Discount": {
+																				"type": "object",
+																				"properties": {
+																					"DiscountAmount": {
+																						"type": "string"
+																					}
+																				}
+																			},
+																			"ExtendedPrice": {
+																				"type": "string"
+																			},
+																			"FairMarketValue": {
+																				"type": "string"
+																			},
+																			"Product": {
+																				"type": "object",
+																				"properties": {
+																					"#text": {
+																						"type": "string"
+																					},
+																					"@productClass": {
+																						"type": "string"
+																					}
+																				}
+																			},
+																			"Quantity": {
+																				"type": "string"
+																			},
+																			"Taxes": {
+																				"type": "object",
+																				"properties": {
+																					"BasisRuleId": {
+																						"type": "string"
+																					},
+																					"CalculatedTax": {
+																						"type": "string"
+																					},
+																					"EffectiveRate": {
+																						"type": "string"
+																					},
+																					"Imposition": {
+																						"type": "object",
+																						"properties": {
+																							"#text": {
+																								"type": "string"
+																							},
+																							"@impositionId": {
+																								"type": "string"
+																							}
+																						}
+																					},
+																					"ImpositionType": {
+																						"type": "object",
+																						"properties": {
+																							"#text": {
+																								"type": "string"
+																							},
+																							"@impositionTypeId": {
+																								"type": "string"
+																							}
+																						}
+																					},
+																					"Jurisdiction": {
+																						"type": "object",
+																						"properties": {
+																							"#text": {
+																								"type": "string"
+																							},
+																							"@jurisdictionId": {
+																								"type": "string"
+																							},
+																							"@jurisdictionLevel": {
+																								"type": "string"
+																							}
+																						}
+																					},
+																					"NonTaxable": {
+																						"type": "string"
+																					},
+																					"TaxRuleId": {
+																						"type": "string"
+																					},
+																					"Taxable": {
+																						"type": "string"
+																					},
+																					"@reasonCode": {
+																						"type": "string"
+																					},
+																					"@situs": {
+																						"type": "string"
+																					},
+																					"@taxCollectedFromParty": {
+																						"type": "string"
+																					},
+																					"@taxResult": {
+																						"type": "string"
+																					},
+																					"@taxType": {
+																						"type": "string"
+																					}
+																				}
+																			},
+																			"TotalTax": {
+																				"type": "string"
+																			},
+																			"@lineItemNumber": {
+																				"type": "string"
+																			}
+																		}
+																	}
+																},
+																"Seller": {
+																	"type": "object",
+																	"properties": {
+																		"Company": {
+																			"type": "string"
+																		}
+																	}
+																},
+																"SubTotal": {
+																	"type": "string"
+																},
+																"Total": {
+																	"type": "string"
+																},
+																"TotalTax": {
+																	"type": "string"
+																},
+																"@documentDate": {
+																	"type": "string"
+																},
+																"@documentNumber": {
+																	"type": "string"
+																},
+																"@transactionType": {
+																	"type": "string"
+																}
+															}
+														},
+														"@xmlns": {
+															"type": "string"
+														},
+														"@xmlns:xsi": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										},
+										"soapenv:Header": {
+											"type": "string"
+										},
+										"@xmlns:soapenv": {
+											"type": "string"
+										}
+									}
 								}
 							}
 						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_s6t",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_s6t",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
+						"orderid": {
+							"type": "string"
+						},
+						"source": {
+							"type": "string"
+						},
+						"storeid": {
+							"type": "string"
+						}
 					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
 				},
-				"annotations": [],
-				"lastPublishTime": "2021-12-08T22:43:29Z"
+				"typeProperties": {
+					"collectionName": "WebsiteData"
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/datasets/SourceDataset_s6t')]",
-				"[concat(variables('workspaceId'), '/datasets/DestinationDataset_s6t')]"
+				"[concat(variables('workspaceId'), '/linkedServices/CosmosDb2')]"
 			]
 		},
 		{
@@ -187,6 +890,33 @@
 						"type": "String"
 					}
 				]
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DelimitedText2')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "files",
+						"fileSystem": "samplefiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/AzureDataLakeStorage1')]"
@@ -355,6 +1085,52 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/AzureDataLakeStorage2')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage2_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage2_accountKey')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureDataLakeStorage3')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage3_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage3_accountKey')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/AzureSqlDatabase1')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
@@ -401,6 +1177,44 @@
 				"type": "AzureSqlDW",
 				"typeProperties": {
 					"connectionString": "[parameters('AzureSynapseAnalytics2_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDb1')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "CosmosDb",
+				"typeProperties": {
+					"connectionString": "[parameters('CosmosDb1_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CosmosDb2')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "CosmosDb",
+				"typeProperties": {
+					"connectionString": "[parameters('CosmosDb2_connectionString')]"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -1260,6 +2074,41 @@
 					"executorCores": 4,
 					"numExecutors": 2
 				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Database1')]",
+			"type": "Microsoft.Synapse/workspaces/databases",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"Ddls": [
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "Database1",
+							"EntityType": "DATABASE",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"Properties": {
+								"IsSyMSCDMDatabase": true
+							},
+							"Source": {
+								"Provider": "ADLS",
+								"Location": "abfss://l200testfs@l200testsa.dfs.core.windows.net/Database1",
+								"Properties": {
+									"FormatType": "csv",
+									"LinkedServiceName": "l200synapse-WorkspaceDefaultStorage"
+								}
+							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					}
+				]
 			},
 			"dependsOn": []
 		},
