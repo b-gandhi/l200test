@@ -5,7 +5,7 @@
 		"workspaceName": {
 			"value": "l200synapse"
 		},
-		"AzureBlobStorage1_connectionString": {
+		"AzureBlobStorage1_servicePrincipalKey": {
 			"value": ""
 		},
 		"AzureDataLakeStorage2_accountKey": {
@@ -37,6 +37,15 @@
 		},
 		"l200withaccesskey_connectionString": {
 			"value": ""
+		},
+		"AzureBlobStorage1_properties_typeProperties_serviceEndpoint": {
+			"value": "https://l200permissiontestsa.blob.core.windows.net"
+		},
+		"AzureBlobStorage1_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"AzureBlobStorage1_properties_typeProperties_servicePrincipalId": {
+			"value": "a20176f6-0520-4d02-98ca-7cc36498b603"
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://l200permissiontestsa.dfs.core.windows.net/"
