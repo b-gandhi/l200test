@@ -168,7 +168,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "test123"
+					"table": "test1234"
 				}
 			},
 			"dependsOn": [
@@ -968,16 +968,22 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "date.csv",
+						"fileName": "data.csv",
 						"folderPath": "troubleshoot",
 						"fileSystem": "samplefiles"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
+					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
 					{
+						"name": "ID",
+						"type": "String"
+					},
+					{
+						"name": "Name",
 						"type": "String"
 					}
 				]
@@ -1559,7 +1565,7 @@
 					"sources": [
 						{
 							"dataset": {
-								"referenceName": "AzureSqlTable1",
+								"referenceName": "DelimitedText1",
 								"type": "DatasetReference"
 							},
 							"name": "source1"
@@ -1581,14 +1587,13 @@
 					],
 					"scriptLines": [
 						"source(output(",
-						"          id as decimal(18,0),",
-						"          name as string",
+						"          ID as string,",
+						"          Name as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
-						"     isolationLevel: 'READ_UNCOMMITTED',",
-						"     format: 'table') ~> source1",
-						"source1 alterRow(insertIf(isNull(name))) ~> alterRow1",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"source1 alterRow(insertIf(isNull(ID))) ~> alterRow1",
 						"alterRow1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
@@ -1602,11 +1607,16 @@
 						"     format: 'table',",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          id = ID,",
+						"          name = Name",
+						"     )) ~> sink1"
 					]
 				}
 			},
 			"dependsOn": [
+				"[concat(variables('workspaceId'), '/datasets/DelimitedText1')]",
 				"[concat(variables('workspaceId'), '/datasets/AzureSqlTable1')]"
 			]
 		},
@@ -1797,7 +1807,7 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "95c607f2-4594-4974-9bca-523ed27fa949"
+						"spark.autotune.trackingId": "da630a1e-b3b2-4a98-9b1e-c76821c429ea"
 					}
 				},
 				"metadata": {
