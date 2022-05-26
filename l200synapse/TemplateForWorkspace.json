@@ -97,6 +97,53 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('workspaceName'), '/Pipeline 1')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow2",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/Dataflow2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/AzureSqlTable1')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
@@ -1750,14 +1797,11 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "58e263c5-dc5e-4941-91cd-09c5d7e81c5b"
+						"spark.autotune.trackingId": "95c607f2-4594-4974-9bca-523ed27fa949"
 					}
 				},
 				"metadata": {
 					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1"
-					},
 					"enableDebugMode": false,
 					"kernelspec": {
 						"name": "synapse_pyspark",
@@ -1779,19 +1823,19 @@
 						"nodeCount": 3,
 						"cores": 4,
 						"memory": 28,
-						"extraHeader": null
+						"automaticScaleJobs": false
 					},
 					"sessionKeepAliveTimeout": 30
 				},
 				"cells": [
 					{
 						"cell_type": "code",
+						"metadata": {},
 						"source": [
 							"print('hi')"
 						],
-						"attachments": null,
 						"outputs": [],
-						"execution_count": 5
+						"execution_count": 1
 					},
 					{
 						"cell_type": "code",
@@ -1807,11 +1851,47 @@
 							}
 						},
 						"source": [
-							" connection_string = token_library.getSecret(\"kv-l200-test\", \"username\", \"\")"
+							"import subprocess\r\n",
+							"import time\r\n",
+							"\r\n",
+							"#1. Establish the subprocess \r\n",
+							"commandlist = [\"telnet\"] + [\"110.166.52.4:22\"]\r\n",
+							"p = subprocess.Popen(commandlist,\r\n",
+							"                     stdin = subprocess.PIPE,\r\n",
+							"                     stdout = subprocess.PIPE,\r\n",
+							"                      stderr = subprocess.PIPE)\r\n",
+							"#2. Give the login name. There is no password\r\n",
+							"p.stdin.write(\"root\\r\")\r\n",
+							"#3. Adding this for sync to avoid any overlap\r\n",
+							"time.sleep(1)\r\n",
+							"#4. Invoke the communicate to execute the applicati"
 						],
-						"attachments": null,
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 10
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"import subprocess\r\n",
+							"command = 'ping -c 1 private-decea2sremonitoring.eastus2.kusto.windows.net'\r\n",
+							"r = subprocess.run(command, capture_output=True, text = True, shell=True)\r\n",
+							"print(r.stderr)\r\n",
+							"print(r.stdout)\r\n",
+							""
+						],
+						"outputs": [],
+						"execution_count": 6
 					}
 				]
 			},
@@ -2373,19 +2453,6 @@
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/managedVirtualNetworks/default')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/Pipeline 1')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": []
 		}
 	]
 }
