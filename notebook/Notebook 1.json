@@ -17,14 +17,11 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "58e263c5-dc5e-4941-91cd-09c5d7e81c5b"
+				"spark.autotune.trackingId": "aefb8abb-9130-4f2d-a7b0-009e41d51baf"
 			}
 		},
 		"metadata": {
 			"saveOutput": true,
-			"synapse_widget": {
-				"version": "0.1"
-			},
 			"enableDebugMode": false,
 			"kernelspec": {
 				"name": "synapse_pyspark",
@@ -46,7 +43,7 @@
 				"nodeCount": 3,
 				"cores": 4,
 				"memory": 28,
-				"extraHeader": null
+				"automaticScaleJobs": false
 			},
 			"sessionKeepAliveTimeout": 30
 		},
@@ -56,8 +53,7 @@
 				"source": [
 					"print('hi')"
 				],
-				"attachments": null,
-				"execution_count": 5
+				"execution_count": 1
 			},
 			{
 				"cell_type": "code",
@@ -73,10 +69,45 @@
 					}
 				},
 				"source": [
-					" connection_string = token_library.getSecret(\"kv-l200-test\", \"username\", \"\")"
+					"import subprocess\r\n",
+					"import time\r\n",
+					"\r\n",
+					"#1. Establish the subprocess \r\n",
+					"commandlist = [\"telnet\"] + [\"110.166.52.4:22\"]\r\n",
+					"p = subprocess.Popen(commandlist,\r\n",
+					"                     stdin = subprocess.PIPE,\r\n",
+					"                     stdout = subprocess.PIPE,\r\n",
+					"                      stderr = subprocess.PIPE)\r\n",
+					"#2. Give the login name. There is no password\r\n",
+					"p.stdin.write(\"root\\r\")\r\n",
+					"#3. Adding this for sync to avoid any overlap\r\n",
+					"time.sleep(1)\r\n",
+					"#4. Invoke the communicate to execute the applicati"
 				],
-				"attachments": null,
-				"execution_count": null
+				"execution_count": 10
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import subprocess\r\n",
+					"command = 'ping -c 1 private-decea2sremonitoring.eastus2.kusto.windows.net'\r\n",
+					"r = subprocess.run(command, capture_output=True, text = True, shell=True)\r\n",
+					"print(r.stderr)\r\n",
+					"print(r.stdout)\r\n",
+					""
+				],
+				"execution_count": 6
 			}
 		]
 	}
