@@ -28,12 +28,13 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          Column_1 as string",
+				"          ID as string,",
+				"          Name as string",
 				"     ),",
-				"     allowSchemaDrift: false,",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 alterRow(insertIf(isNull(name))) ~> alterRow1",
+				"source1 alterRow(insertIf(isNull(ID))) ~> alterRow1",
 				"alterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -47,7 +48,11 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id = ID,",
+				"          name = Name",
+				"     )) ~> sink1"
 			]
 		}
 	}
