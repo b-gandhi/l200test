@@ -46,8 +46,6 @@
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'table',",
-				"     preSQLs:['SET IDENTITY_INSERT dbo.Test1234 ON'],",
-				"     postSQLs:['Set Identity_Insert dbo.Test1234 Off'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
