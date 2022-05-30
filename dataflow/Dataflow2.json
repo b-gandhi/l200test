@@ -51,7 +51,7 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          name = Name",
+				"          id = ID",
 				"     )) ~> sink1"
 			]
 		}
