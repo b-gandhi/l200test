@@ -1,0 +1,88 @@
+{
+	"name": "SourceDataset_lam",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "l200withaccesskey",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "configdata.EditSheetDetails.txt",
+				"container": "samplefiles"
+			},
+			"columnDelimiter": "⯑",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "EditSheetDetailId",
+				"type": "String"
+			},
+			{
+				"name": "EditIdSymbol",
+				"type": "String"
+			},
+			{
+				"name": "EditName",
+				"type": "String"
+			},
+			{
+				"name": "EditSheetId",
+				"type": "String"
+			},
+			{
+				"name": "EditCategoryId",
+				"type": "String"
+			},
+			{
+				"name": "PayAdjustSymbolicName",
+				"type": "String"
+			},
+			{
+				"name": "IsActive",
+				"type": "String"
+			},
+			{
+				"name": "CustomEditCategoryId",
+				"type": "String"
+			},
+			{
+				"name": "ProviderTypeSymbolicName",
+				"type": "String"
+			},
+			{
+				"name": "LcdNcdMessageCode",
+				"type": "String"
+			},
+			{
+				"name": "PayAdjustValue",
+				"type": "String"
+			},
+			{
+				"name": "MessageText",
+				"type": "String"
+			},
+			{
+				"name": "DispositionSymbolicName",
+				"type": "String"
+			},
+			{
+				"name": "IsAnalyticsOnly",
+				"type": "String"
+			},
+			{
+				"name": "IsLcdNcdActive",
+				"type": "String"
+			},
+			{
+				"name": "LcdNcdPayorCode",
+				"type": "String"
+			}
+		]
+	}
+}
