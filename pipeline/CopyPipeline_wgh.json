@@ -1,0 +1,223 @@
+{
+	"name": "CopyPipeline_wgh",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_wgh",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "samplefiles//ad3e062f-0757-4719-a01b-c244386ac4e0.parquet"
+					},
+					{
+						"name": "Destination",
+						"value": ".ad3e062f-0757-4719-a01b-c244386ac4e0"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"allowCopyCommand": true,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "EditSheetDetailId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EditSheetDetailId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EditIdSymbol",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EditIdSymbol",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EditName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EditName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EditSheetId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EditSheetId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EditCategoryId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EditCategoryId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PayAdjustSymbolicName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PayAdjustSymbolicName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IsActive",
+									"type": "String"
+								},
+								"sink": {
+									"name": "IsActive",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CustomEditCategoryId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CustomEditCategoryId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ProviderTypeSymbolicName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ProviderTypeSymbolicName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LcdNcdMessageCode",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LcdNcdMessageCode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PayAdjustValue",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PayAdjustValue",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MessageText",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MessageText",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DispositionSymbolicName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DispositionSymbolicName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IsAnalyticsOnly",
+									"type": "String"
+								},
+								"sink": {
+									"name": "IsAnalyticsOnly",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "IsLcdNcdActive",
+									"type": "String"
+								},
+								"sink": {
+									"name": "IsLcdNcdActive",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LcdNcdPayorCode",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LcdNcdPayorCode",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_wgh",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_wgh",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

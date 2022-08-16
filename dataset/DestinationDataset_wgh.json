@@ -1,0 +1,15 @@
+{
+	"name": "DestinationDataset_wgh",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "ad3e062f-0757-4719-a01b-c244386ac4e0"
+		}
+	}
+}
