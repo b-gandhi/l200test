@@ -1,0 +1,85 @@
+{
+	"name": "SourceDataset_wgh",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "ad3e062f-0757-4719-a01b-c244386ac4e0.parquet",
+				"fileSystem": "samplefiles"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "EditSheetDetailId",
+				"type": "UTF8"
+			},
+			{
+				"name": "EditIdSymbol",
+				"type": "UTF8"
+			},
+			{
+				"name": "EditName",
+				"type": "UTF8"
+			},
+			{
+				"name": "EditSheetId",
+				"type": "UTF8"
+			},
+			{
+				"name": "EditCategoryId",
+				"type": "UTF8"
+			},
+			{
+				"name": "PayAdjustSymbolicName",
+				"type": "UTF8"
+			},
+			{
+				"name": "IsActive",
+				"type": "UTF8"
+			},
+			{
+				"name": "CustomEditCategoryId",
+				"type": "UTF8"
+			},
+			{
+				"name": "ProviderTypeSymbolicName",
+				"type": "UTF8"
+			},
+			{
+				"name": "LcdNcdMessageCode",
+				"type": "UTF8"
+			},
+			{
+				"name": "PayAdjustValue",
+				"type": "UTF8"
+			},
+			{
+				"name": "MessageText",
+				"type": "UTF8"
+			},
+			{
+				"name": "DispositionSymbolicName",
+				"type": "UTF8"
+			},
+			{
+				"name": "IsAnalyticsOnly",
+				"type": "UTF8"
+			},
+			{
+				"name": "IsLcdNcdActive",
+				"type": "UTF8"
+			},
+			{
+				"name": "LcdNcdPayorCode",
+				"type": "UTF8"
+			}
+		]
+	}
+}
